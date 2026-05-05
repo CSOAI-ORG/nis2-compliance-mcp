@@ -1,70 +1,38 @@
-# NIS2 Compliance MCP
+<div align="center">
 
-**The only MCP server that automates NIS2 (Directive (EU) 2022/2555) compliance** for essential and important entities across the 18 sectors in scope.
+[![GitHub stars](https://img.shields.io/github/stars/CSOAI-ORG/nis2-compliance-mcp)](https://github.com/CSOAI-ORG/nis2-compliance-mcp/stargazers)
 
-Built by [MEOK AI Labs](https://meok.ai). Pairs with our DORA, EU AI Act, ISO 42001, GDPR, and CRA MCPs for full-stack EU regulatory coverage.
+# unis2U complianceU mcp
 
-## What it does
+****The only MCP server that automates NIS2 (Directive (EU) 2022/2555) compliance** for essential and important entities across the 18 sectors in scope.**
 
-Give any Claude / ChatGPT / Cursor agent the ability to:
+[![npm version](https://img.shields.io/npm/v/@meok-ai/nis2-compliance-mcp)](https://www.npmjs.com/package/@meok-ai/nis2-compliance-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-255+_servers-purple)](https://meok.ai)
 
-- **Classify your entity** as essential, important, or out-of-scope across 18 sectors
-- **Audit all 10 Article 21 risk-management measures** (the minimum cybersecurity baseline)
-- **Classify cyber incidents** against Article 23 thresholds (24h / 72h / 1-month reporting)
-- **Generate the management-body accountability checklist** under Article 20 (with personal liability)
-- **Emit signed certificates** for audit trail and board reporting
-- **Track enforcement + national transposition status**
+[Installation](#installation) · [Docs](https://csoai.org) · [Report Bug](https://github.com/CSOAI-ORG/nis2-compliance-mcp/issues)
 
-## Install
+</div>
+
+---
+
+## Installation
 
 ```bash
 pip install nis2-compliance-mcp
+# or
+npm install -g @meok-ai/nis2-compliance-mcp
 ```
 
-## Use with Claude Desktop
+## Quick Start
 
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+See the project repository for full documentation and examples.
 
-```json
-{
-  "mcpServers": {
-    "nis2": {
-      "command": "nis2-compliance-mcp"
-    }
-  }
-}
-```
+## Enterprise Support
 
-Then ask Claude things like:
-
-- *"Am I in scope for NIS2? I run a German cloud service provider with 300 employees and €60M revenue."*
-- *"Audit my Article 21 measures against this list of current controls: ISO 27001, Falcon EDR, Okta SSO, etc."*
-- *"Classify this incident: 120,000 customers affected, 4 hours downtime, cross-border impact."*
-- *"Generate my Article 20 management-body accountability checklist."*
-
-## Tiers
-
-- **Free** — 10 calls/day, per-measure audits, incident classification, checklists
-- **Pro (£49/mo)** — unlimited calls, full Article 21 sweep, **signed certificates**, Article 20 training log generator
-- **Enterprise (£499/mo)** — multi-entity, neural-net gap detection, cross-MCP framework crosswalk, audit trail export
-- **48-hour written assessment (£5,000)** — senior compliance engineer delivers full NIS2 gap report + remediation plan
-
-## Why it matters
-
-- **Enforcement live since 17 Oct 2024** — national laws rolling out across 27 Member States
-- **Essential entity penalties: up to €10M or 2% of global turnover**
-- **Important entity penalties: up to €7M or 1.4% of global turnover**
-- **Management bodies personally liable** under Article 20 (several Member States already transposed this)
-- **Overlaps DORA, GDPR, CRA** — crosswalk MCP (separate) unifies all three
-
-## Legal basis
-
-- Directive (EU) 2022/2555 (NIS2)
-- Commission Implementing Regulation laying down technical requirements for specific sectors
-- Related: DORA (financial), CRA (products with digital elements), CER Directive (physical resilience)
-
-Automated self-assessment. Not a substitute for national competent-authority review or legal counsel.
+- 📧 nicholas@csoai.org
+- 🌐 [CSOAI.org](https://csoai.org)
 
 ## License
 
-MIT. MEOK AI Labs, 2026.
+MIT © [CSOAI](https://csoai.org)
