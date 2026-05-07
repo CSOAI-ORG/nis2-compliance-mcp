@@ -1,0 +1,46 @@
+name: nis2-compliance-mcp
+description: 'Nis2 Compliance tools for AI agents. Built by MEOK AI Labs.'
+version: 1.0.0
+tools:
+- name: classify_entity
+  description: 'Classify Entity operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: list_article_21_measures
+  description: 'List Article 21 Measures operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: audit_article_21
+  description: 'Audit Article 21 operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: classify_incident
+  description: 'Classify Incident operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: management_body_checklist
+  description: 'Management Body Checklist operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: get_nis2_certificate
+  description: 'Get Nis2 Certificate operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: enforcement_status
+  description: 'Enforcement Status operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
