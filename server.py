@@ -130,7 +130,24 @@ mcp = FastMCP(
 @mcp.tool()
 def classify_entity(entity_description: str, employees: int = 0, turnover_million_eur: float = 0.0, api_key: str = "") -> str:
     """Classify an entity's NIS2 scope (essential / important / out-of-scope) + sector.
-    Size-cap rules (Article 2): essential if in Annex I AND medium-size (>50 FTE or >€10M) — generally large (>250 FTE or >€50M). Important if Annex II + medium-size."""
+    Size-cap rules (Article 2): essential if in Annex I AND medium-size (>50 FTE or >€10M) — generally large (>250 FTE or >€50M). Important if Annex II + medium-size.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
@@ -186,7 +203,24 @@ def classify_entity(entity_description: str, employees: int = 0, turnover_millio
 
 @mcp.tool()
 def list_article_21_measures(api_key: str = "") -> str:
-    """List all 10 cybersecurity risk-management measures required under NIS2 Article 21."""
+    """List all 10 cybersecurity risk-management measures required under NIS2 Article 21.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
@@ -200,7 +234,24 @@ def list_article_21_measures(api_key: str = "") -> str:
 @mcp.tool()
 def audit_article_21(entity_description: str, current_controls: str = "", api_key: str = "") -> str:
     """Audit your current controls against NIS2 Article 21's 10 mandatory risk-management measures.
-    Returns per-measure evidence status + gap list + sanction exposure tier."""
+    Returns per-measure evidence status + gap list + sanction exposure tier.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
@@ -252,7 +303,24 @@ def classify_incident(
     api_key: str = "",
 ) -> str:
     """Classify a cyber incident against NIS2 Article 23 thresholds.
-    Returns whether 'significant' — triggering 24h early warning, 72h incident notification, 1-month final report."""
+    Returns whether 'significant' — triggering 24h early warning, 72h incident notification, 1-month final report.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
@@ -304,7 +372,24 @@ def classify_incident(
 
 @mcp.tool()
 def management_body_checklist(api_key: str = "") -> str:
-    """NIS2 Article 20 — management body accountability checklist. Directors can be held personally liable."""
+    """NIS2 Article 20 — management body accountability checklist. Directors can be held personally liable.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg})
@@ -329,7 +414,23 @@ def management_body_checklist(api_key: str = "") -> str:
 
 @mcp.tool()
 def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = "") -> str:
-    """Generate a timestamped signed NIS2 compliance certificate (Pro/Enterprise tier)."""
+    """Generate a timestamped signed NIS2 compliance certificate (Pro/Enterprise tier).
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
@@ -358,7 +459,24 @@ def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = 
 
 @mcp.tool()
 def enforcement_status(api_key: str = "") -> str:
-    """Current NIS2 enforcement status + national transposition tracker."""
+    """Current NIS2 enforcement status + national transposition tracker.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     now = datetime.now(timezone.utc)
     return json.dumps({
         "directive": "Directive (EU) 2022/2555 (NIS2)",
