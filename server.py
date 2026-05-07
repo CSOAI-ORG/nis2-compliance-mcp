@@ -147,6 +147,13 @@ def classify_entity(entity_description: str, employees: int = 0, turnover_millio
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        entity_description (str): The entity description to analyze or process.
+        employees (int): The employees to analyze or process.
+        turnover_million_eur (float): The turnover million eur to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -234,6 +241,10 @@ def list_article_21_measures(api_key: str = "") -> str:
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -279,6 +290,12 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        entity_description (str): The entity description to analyze or process.
+        current_controls (str): The current controls to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -362,6 +379,16 @@ def classify_incident(
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        incident_description (str): The incident description to analyze or process.
+        users_affected (int): The users affected to analyze or process.
+        duration_hours (float): The duration hours to analyze or process.
+        cross_border (bool): The cross border to analyze or process.
+        data_breach (bool): The data breach to analyze or process.
+        financial_loss_eur (float): The financial loss eur to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -445,6 +472,10 @@ def management_body_checklist(api_key: str = "") -> str:
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -500,6 +531,12 @@ def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = 
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        entity_name (str): The entity name to analyze or process.
+        overall_score (float): The overall score to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -560,6 +597,10 @@ def enforcement_status(api_key: str = "") -> str:
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
