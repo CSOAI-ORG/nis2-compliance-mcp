@@ -1,0 +1,81 @@
+# nis2-compliance-mcp
+> NIS2 Directive (EU 2022/2555) compliance for essential and important entities across 18 sectors. Covers entity classification, Article 21 risk-management audit, Article 23 incident reporting, and Article 20 management body accountability. By MEOK AI Labs.
+
+## Install
+pip install nis2-compliance-mcp
+
+## Auth
+- Free tier: 10 calls/day, no API key needed
+- Pro tier (£49/mo): unlimited + signed certificates, set MEOK_API_KEY env var
+- All tools are read-only and stateless
+
+## Tools
+
+### classify_entity
+Classify an entity's NIS2 scope: essential, important, or out-of-scope.
+- `entity_description` (str, required): Description of the entity and its sector
+- `employees` (int, optional, default 0): Number of employees (for size-cap rules)
+- `turnover_million_eur` (float, optional, default 0): Annual turnover in millions EUR
+- `api_key` (str, optional): MEOK API key
+- Returns: status (IN_SCOPE/OUT_OF_SCOPE/OUT_OF_SCOPE_BY_SIZE), classification (ESSENTIAL/IMPORTANT), matched_annex_i_sectors, matched_annex_ii_sectors, size category, penalties_headline, registration_required
+- Use when: Determining if NIS2 applies and which tier (essential/important)
+
+### list_article_21_measures
+List all 10 mandatory cybersecurity risk-management measures under Article 21.
+- `api_key` (str, optional): MEOK API key
+- Returns: All 10 measures with names and detection keywords
+- Use when: Understanding baseline NIS2 security requirements
+
+### audit_article_21
+Audit current controls against NIS2 Article 21's 10 mandatory measures.
+- `entity_description` (str, required): Description of the entity
+- `current_controls` (str, optional): Description of current cybersecurity controls
+- `api_key` (str, optional): MEOK API key
+- Returns: score_percent, passed (N/10), assessment (COMPLIANT/PARTIAL/NON_COMPLIANT), gaps_to_address, remediation_priority, per-measure EVIDENCE_FOUND/GAP with evidence_signals
+- Use when: Running a NIS2 compliance gap analysis
+
+### classify_incident
+Classify a cyber incident against NIS2 Article 23 significant-incident thresholds.
+- `incident_description` (str, required): Description of the incident
+- `users_affected` (int, optional, default 0): Number of users/customers affected
+- `duration_hours` (float, optional, default 0): Duration of service disruption
+- `cross_border` (bool, optional, default False): Whether impact crosses Member State borders
+- `data_breach` (bool, optional, default False): Whether data confidentiality/integrity was breached
+- `financial_loss_eur` (float, optional, default 0): Direct financial impact in EUR
+- `api_key` (str, optional): MEOK API key
+- Returns: classification (SIGNIFICANT_INCIDENT/NON_SIGNIFICANT), reporting_required, timeline (24h early warning, 72h notification, 1mo final report with UTC deadlines), criteria_met, parallel_obligations (GDPR/DORA crossover)
+- Use when: A cyber incident occurs and you need to determine NIS2 reporting obligations
+
+### management_body_checklist
+NIS2 Article 20 management body accountability checklist. Directors can be held personally liable.
+- `api_key` (str, optional): MEOK API key
+- Returns: 8-item checklist (policy approval, quarterly review, training records, incident escalation, etc.), personal_liability details, failure_consequences
+- Use when: Ensuring board-level NIS2 governance obligations are met
+
+### get_nis2_certificate
+Generate a signed NIS2 compliance certificate (Pro tier).
+- `entity_name` (str, required): Entity name for the certificate
+- `overall_score` (float, required): Compliance score 0-100
+- `api_key` (str, optional): MEOK API key
+- Returns: certificate_id, SHA-256 signature hash, valid_until (365 days), assessment status
+- Use when: Generating compliance evidence for auditors or procurement
+
+### enforcement_status
+Current NIS2 enforcement status and national transposition tracker.
+- `api_key` (str, optional): MEOK API key
+- Returns: days_since_eu_enforcement, national_transposition status, key_dates, related_regulations (DORA, CRA, CER)
+- Use when: Checking current enforcement status across Member States
+
+## Sectors in Scope
+Annex I (Essential): energy, transport, banking, financial market infra, health, drinking water, waste water, digital infrastructure, ICT service management (MSP/MSSP), public administration, space
+Annex II (Important): postal, waste management, chemicals, food, manufacturing, digital providers, research
+
+## Penalties
+- Essential entities: up to EUR 10M or 2% of global turnover
+- Important entities: up to EUR 7M or 1.4% of global turnover
+
+## Quick Example
+```python
+result = classify_entity(entity_description="Cloud hosting provider in Germany", employees=200, turnover_million_eur=25)
+# Returns: status="IN_SCOPE", classification="ESSENTIAL", matched_annex_i_sectors=["digital_infrastructure"]
+```

@@ -38,7 +38,9 @@ try:
     _AUTH_ENGINE_AVAILABLE = True
 except ImportError:
     _AUTH_ENGINE_AVAILABLE = False
+
     def _shared_check_access(api_key: str = ""):
+        """Fallback when shared auth engine is not available."""
         if _MEOK_API_KEY and api_key and api_key == _MEOK_API_KEY:
             return True, "OK", "pro"
         if _MEOK_API_KEY and api_key and api_key != _MEOK_API_KEY:

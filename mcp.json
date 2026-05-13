@@ -1,0 +1,10 @@
+{
+  "name": "NIS2 Compliance",
+  "description": "EU NIS2 Directive compliance for essential and important entities",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/meok-ai-labs/nis2-compliance-mcp",
+  "homepage": "https://meok.ai/mcp/nis2-compliance-mcp",
+  "license": "MIT",
+  "runtime": "python",
+  "entryPoint": "server.py"
+}

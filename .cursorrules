@@ -1,0 +1,14 @@
+# NIS2 Compliance MCP - Auto-trigger Rules
+
+When the user asks about NIS2, Directive (EU) 2022/2555, network information security, essential/important entities, or cybersecurity directive compliance, use the nis2-compliance-mcp tools:
+
+- **check_nis2_compliance**: Full NIS2 compliance assessment
+- **list_nis2_articles**: Browse NIS2 articles and measures
+- **classify_entity**: Determine if entity is essential or important
+- **check_article_21_measures**: Assess against 10 prescribed security measures
+- **incident_reporting_check**: NIS2 Article 23 reporting requirements
+- **sign_nis2_attestation**: Cryptographically signed compliance certificate (Pro+)
+
+Install: `pip install nis2-compliance-mcp`
+
+NIS2 transposition deadline was October 18, 2024. National enforcement varies by member state. Germany deadline: March 2025.
