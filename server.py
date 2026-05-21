@@ -33,19 +33,18 @@ import os
 _MEOK_API_KEY = _os.environ.get("MEOK_API_KEY", "")
 
 try:
-    sys.path.insert(0, os.path.expanduser("~/clawd/meok-labs-engine/shared"))
-    from auth_middleware import check_access as _shared_check_access
-    _AUTH_ENGINE_AVAILABLE = True
+    from meok_auth import check_access as _shared_check_access
 except ImportError:
-    _AUTH_ENGINE_AVAILABLE = False
-
-    def _shared_check_access(api_key: str = ""):
-        """Fallback when shared auth engine is not available."""
-        if _MEOK_API_KEY and api_key and api_key == _MEOK_API_KEY:
-            return True, "OK", "pro"
-        if _MEOK_API_KEY and api_key and api_key != _MEOK_API_KEY:
-            return False, "Invalid API key. Get one at https://meok.ai/api-keys", "free"
-        return True, "OK", "free"
+    try:
+        from auth_middleware import check_access as _shared_check_access
+    except ImportError:
+        def _shared_check_access(api_key: str = ""):
+            """Fallback when shared auth engine is not available."""
+            if _MEOK_API_KEY and api_key and api_key == _MEOK_API_KEY:
+                return True, "OK", "pro"
+            if _MEOK_API_KEY and api_key and api_key != _MEOK_API_KEY:
+                return False, "Invalid API key. Get one at https://meok.ai/api-keys", "free"
+            return True, "OK", "free"
 
 
 def check_access(api_key: str = ""):

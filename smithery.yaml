@@ -1,46 +1,36 @@
 name: nis2-compliance-mcp
-description: 'Nis2 Compliance tools for AI agents. Built by MEOK AI Labs.'
-version: 1.0.0
+description: "NIS2 Directive (EU 2022/2555) compliance for essential and important entities - classify entity scope, audit Article 21 risk-management measures, classify cyber incidents per Article 23, and generate management body accountability evidence"
+version: 1.2.7
+author: MEOK AI Labs
+homepage: https://safetyof.ai
+repository: https://github.com/MEOK-AI-Labs/nis2-compliance-mcp
+license: MIT
+categories:
+  - compliance
+  - cybersecurity
+  - governance
+
 tools:
-- name: classify_entity
-  description: 'Classify Entity operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: list_article_21_measures
-  description: 'List Article 21 Measures operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: audit_article_21
-  description: 'Audit Article 21 operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: classify_incident
-  description: 'Classify Incident operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: management_body_checklist
-  description: 'Management Body Checklist operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: get_nis2_certificate
-  description: 'Get Nis2 Certificate operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: enforcement_status
-  description: 'Enforcement Status operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
+  - name: classify_entity
+    description: "Classify an entity's NIS2 scope as essential, important, or out-of-scope with sector matching and size threshold analysis per Article 2"
+  - name: list_article_21_measures
+    description: "List all 10 cybersecurity risk-management measures required under NIS2 Article 21 with keywords and implementation guidance"
+  - name: audit_article_21
+    description: "Audit current controls against NIS2 Article 21's 10 mandatory risk-management measures with per-measure evidence status and gap list"
+  - name: classify_incident
+    description: "Classify a cyber incident against NIS2 Article 23 thresholds - determines if significant requiring 24h/72h/1-month reporting timeline"
+  - name: management_body_checklist
+    description: "NIS2 Article 20 management body accountability checklist - personal liability requirements and training obligations for directors"
+  - name: get_nis2_certificate
+    description: "Generate a timestamped signed NIS2 compliance certificate with HMAC-SHA256 attestation (Pro/Enterprise tier)"
+  - name: enforcement_status
+    description: "Current NIS2 enforcement status, national transposition tracker, key dates, and related regulations including DORA and CRA"
+
+build:
+  type: python
+  entrypoint: server.py
+  dependencies:
+    - mcp>=1.0.0
+
+runtime:
+  python: ">=3.10"

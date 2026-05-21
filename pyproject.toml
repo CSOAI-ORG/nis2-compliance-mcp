@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nis2-compliance-mcp"
-version = "1.2.5"
+version = "1.2.7"
 description = "NIS2 Directive (EU 2022/2555) compliance for AI agents. 10 Article 21 risk-management measures audit, Article 23 incident classification, Article 20 management-body accountability. For the 18 essential/important entity sectors. By MEOK AI Labs."
 license = {file = "LICENSE"}
 readme = "README.md"
