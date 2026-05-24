@@ -12,6 +12,25 @@
 
 Automated compliance with the NIS2 Directive (EU 2022/2555), the EU's updated cybersecurity framework. Classify entities, audit Article 21 risk-management measures, classify incidents under Article 23, and manage the Register of Information.
 
+
+## 🆕 Quote verbatim NIS2 text in any audit
+
+Install our sister MCP and pipe it through your agent for auditor-defensible quotes:
+
+```bash
+pip install eu-ai-act-compliance-mcp  # 1.5.1+
+```
+
+```python
+# In your Claude / OpenAI tool-use agent:
+search_regulation(query="incident reporting", regulation="nis2", limit=3)
+get_article_text(regulation="nis2", article_number=17)
+```
+
+Returns verbatim NIS2 text from publications.europa.eu Cellar (SPARQL-synced daily) with a canonical EUR-Lex deep link on every snippet — drop straight into audit evidence packs.
+
+---
+
 ## Tools
 
 | Tool | Description | Parameters |

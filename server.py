@@ -54,7 +54,7 @@ def check_access(api_key: str = ""):
 FREE_DAILY_LIMIT = 10
 _usage: dict[str, list[datetime]] = defaultdict(list)
 
-UPGRADE_STRIPE_49 = "https://buy.stripe.com/7sY7sN2G01466kdaqI8k834"
+UPGRADE_STRIPE_PRO = "https://buy.stripe.com/eVq9AV4O87sudMF42k8k839"  # £79/mo Pro
 UPGRADE_STRIPE_499 = "https://buy.stripe.com/28EcN7fsM002fUN1Uc8k835"
 UPGRADE_STRIPE_5000 = "https://buy.stripe.com/4gM7sN2G0bIKeQJfL28k833"
 
@@ -68,7 +68,7 @@ def _check_rate_limit(caller: str = "anonymous", tier: str = "free") -> Optional
     if len(_usage[caller]) >= FREE_DAILY_LIMIT:
         return (
             f"Free tier limit reached ({FREE_DAILY_LIMIT}/day). Unlock unlimited + "
-            f"audit_all_obligations + signed certificates for £49/mo: {UPGRADE_STRIPE_49}"
+            f"audit_all_obligations + signed certificates for £79/mo: {UPGRADE_STRIPE_PRO}"
         )
     _usage[caller].append(now)
     return None
@@ -172,9 +172,9 @@ def classify_entity(entity_description: str, employees: int = 0, turnover_millio
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": err, "upgrade_url": "https://councilof.ai"})
 
     d = entity_description.lower()
     matched_annex_i = [k for k, v in ANNEX_I_ESSENTIAL_SECTORS.items() if any(t in d for t in k.split("_")) or any(t in d for t in v.lower().split(","))]
@@ -263,7 +263,7 @@ def list_article_21_measures(api_key: str = "") -> str:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     return json.dumps({
         "directive": "Directive (EU) 2022/2555 (NIS2)",
         "article": "Article 21 — Cybersecurity risk-management measures (minimum baseline)",
@@ -314,9 +314,9 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": err, "upgrade_url": "https://councilof.ai"})
 
     combined = (entity_description + " " + current_controls).lower()
     results = []
@@ -348,7 +348,7 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
         ),
         "measures_detail": results,
         "management_body_liability_note": "NIS2 Article 20: management bodies are directly responsible for approving measures AND receive training. National authorities can impose personal liability.",
-        "upsell": f"Generate signed governance-accountability evidence pack (Article 20) with Pro tier (£49/mo): {UPGRADE_STRIPE_49}" if tier == "free" else None,
+        "upsell": f"Generate signed governance-accountability evidence pack (Article 20) with Pro tier (£79/mo): {UPGRADE_STRIPE_PRO}" if tier == "free" else None,
     }, indent=2)
 
 
@@ -407,9 +407,9 @@ def classify_incident(
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": err, "upgrade_url": "https://councilof.ai"})
 
     # Significant incident criteria (Article 23.3 + Commission Implementing Regulation for specific sectors)
     triggers = []
@@ -555,11 +555,11 @@ def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = 
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": UPGRADE_STRIPE_49})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if tier == "free":
         return json.dumps({
-            "error": "Signed certificates require Pro (£49/mo) or Enterprise (£499/mo) tier.",
-            "upgrade_url": UPGRADE_STRIPE_49,
+            "error": "Signed certificates require Pro (£79/mo) or Enterprise (£499/mo) tier.",
+            "upgrade_url": "https://councilof.ai",
             "what_pro_unlocks": "Signed certificates, unlimited audits, governance-accountability pack, Article 20 training log generator, cross-MCP framework crosswalk.",
         })
     ts = datetime.now(timezone.utc)
@@ -622,12 +622,15 @@ def enforcement_status(api_key: str = "") -> str:
         "directive": "Directive (EU) 2022/2555 (NIS2)",
         "eu_enforcement_date": ENFORCEMENT_DATE.isoformat(),
         "days_since_eu_enforcement": (now - ENFORCEMENT_DATE).days,
-        "national_transposition": "In progress across Member States — Germany (BSI-KritisV), France (ANSSI), Italy (NIS2 decreto), Netherlands (Cyberbeveiligingswet), etc.",
+        "national_transposition": "22 of 27 Member States transposed as of April 2026 — Germany (NIS2UmsuCG, Dec 2025), France (loi de transposition, ANSSI), Italy (D.lgs 138/2024), Netherlands (Cyberbeveiligingswet), Sweden (Cyber Security Act, Jan 2026), Austria (NISG 2026, Oct 2026), Portugal (Apr 2026). First Q1 2026 enforcement penalties already issued. Belgium conformity-assessment deadline 18 Apr 2026 was the first national gate.",
         "tracker_url": "https://www.enisa.europa.eu/topics/nis-directive",
         "key_dates": [
             {"date": "2023-01-16", "event": "NIS2 entered into force (EU level)"},
-            {"date": "2024-10-18", "event": "Transposition deadline (Member States should have adopted national laws — many still in progress)"},
+            {"date": "2024-10-18", "event": "EU-level transposition deadline — 22 of 27 Member States now transposed (April 2026)"},
             {"date": "2025-04-17", "event": "First list of essential/important entities to be established by Member States"},
+            {"date": "2026-04-18", "event": "Belgium — first national conformity-assessment deadline (essential entities required to submit verified evidence of cybersecurity controls)"},
+            {"date": "2026-Q1", "event": "🔥 First administrative penalties issued under NIS2 (Germany, France, Netherlands actively auditing)"},
+            {"date": "2026-10", "event": "Austria's NISG 2026 Act takes effect"},
             {"date": "2027-10-17", "event": "Commission review of scope / effectiveness"},
         ],
         "related_regulations": [
