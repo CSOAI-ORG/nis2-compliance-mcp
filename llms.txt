@@ -79,3 +79,8 @@ Annex II (Important): postal, waste management, chemicals, food, manufacturing, 
 result = classify_entity(entity_description="Cloud hosting provider in Germany", employees=200, turnover_million_eur=25)
 # Returns: status="IN_SCOPE", classification="ESSENTIAL", matched_annex_i_sectors=["digital_infrastructure"]
 ```
+
+## Pay-per-call (PAYG)
+
+This MCP supports MEOK_PAYG_KEY env var for £0.05-per-call billing without a subscription.
+Top up: https://councilof.ai/payg
