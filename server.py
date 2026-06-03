@@ -20,11 +20,19 @@ Run:     python server.py
 """
 
 import json
+import re
 import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from collections import defaultdict
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import FastMCP, Context
+try:
+    from meok_x402 import paywalled, is_paid_call  # x402 per-call agent billing — no-op unless X402_ENABLED
+except ImportError:  # vendored module absent — stay free
+    def paywalled(*_a, **_k):
+        return lambda fn: fn
+    def is_paid_call() -> bool:
+        return False
 
 import os as _os
 import sys
@@ -62,6 +70,8 @@ UPGRADE_STRIPE_5000 = "https://buy.stripe.com/4gM7sN2G0bIKeQJfL28k833"
 def _check_rate_limit(caller: str = "anonymous", tier: str = "free") -> Optional[str]:
     if tier in ("pro", "professional", "enterprise"):
         return None
+    if is_paid_call():
+        return None  # settled x402 payment — this call is already paid for
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=1)
     _usage[caller] = [t for t in _usage[caller] if t > cutoff]
@@ -177,8 +187,31 @@ def classify_entity(entity_description: str, employees: int = 0, turnover_millio
         return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/3cI00lgwQ28aaAtgP68k90M?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
 
     d = entity_description.lower()
-    matched_annex_i = [k for k, v in ANNEX_I_ESSENTIAL_SECTORS.items() if any(t in d for t in k.split("_")) or any(t in d for t in v.lower().split(","))]
-    matched_annex_ii = [k for k, v in ANNEX_II_IMPORTANT_SECTORS.items() if any(t in d for t in k.split("_")) or any(t in d for t in v.lower().split(","))]
+    # Sector matching: generic key tokens (e.g. "service", "market", "digital") are too broad and
+    # produce false Annex I hits for Annex II entities (postal/digital-providers). Restrict to
+    # specific, multi-character anchor terms and match on word boundaries.
+    _GENERIC = {"service", "services", "management", "provider", "providers", "infrastructure",
+                "distribution", "production", "processing", "market", "manufacture", "other", "b2b"}
+
+    def _toks(key: str, value: str) -> set:
+        out = {t for t in key.split("_") if len(t) > 3 and t not in _GENERIC}
+        for seg in value.lower().replace("—", ",").split(","):
+            seg = seg.strip()
+            if len(seg) >= 5 and seg not in _GENERIC:
+                out.add(seg)
+        return out
+
+    def _hit(text: str, key: str, value: str) -> bool:
+        return any(re.search(rf"\b{re.escape(t)}", text) for t in _toks(key, value))
+
+    matched_annex_i = [k for k, v in ANNEX_I_ESSENTIAL_SECTORS.items() if _hit(d, k, v)]
+    matched_annex_ii = [k for k, v in ANNEX_II_IMPORTANT_SECTORS.items() if _hit(d, k, v)]
+    # Annex II digital providers (online marketplaces/search engines/social networks) are distinct
+    # from Annex I digital infrastructure; an explicit digital-provider signal takes precedence.
+    if any(s in d for s in ("marketplace", "search engine", "social network", "online platform")):
+        matched_annex_i = [k for k in matched_annex_i if k not in ("digital_infrastructure", "financial_market_infra")]
+        if "digital_providers" not in matched_annex_ii:
+            matched_annex_ii.append("digital_providers")
 
     # Size thresholds (Article 2.1 / Article 2.2 + Commission Recommendation 2003/361/EC)
     # Medium = 50+ FTE OR €10M+ turnover. Large = 250+ FTE OR €50M+.
@@ -272,8 +305,12 @@ def list_article_21_measures(api_key: str = "") -> str:
 
 
 @mcp.tool()
-def audit_article_21(entity_description: str, current_controls: str = "", api_key: str = "") -> str:
-    """Audit your current controls against NIS2 Article 21's 10 mandatory risk-management measures.
+@paywalled(price="$0.50")
+def audit_article_21(entity_description: str, current_controls: str = "", api_key: str = "",
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.50/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    Audit your current controls against NIS2 Article 21's 10 mandatory risk-management measures.
     Returns per-measure evidence status + gap list + sanction exposure tier.
 
     Behavior:
@@ -353,6 +390,7 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
 
 
 @mcp.tool()
+@paywalled(price="$0.10")
 def classify_incident(
     incident_description: str,
     users_affected: int = 0,
@@ -361,8 +399,10 @@ def classify_incident(
     data_breach: bool = False,
     financial_loss_eur: float = 0,
     api_key: str = "",
-) -> str:
-    """Classify a cyber incident against NIS2 Article 23 thresholds.
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.10/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    Classify a cyber incident against NIS2 Article 23 thresholds.
     Returns whether 'significant' — triggering 24h early warning, 72h incident notification, 1-month final report.
 
     Behavior:
@@ -455,8 +495,12 @@ def classify_incident(
 
 
 @mcp.tool()
-def management_body_checklist(api_key: str = "") -> str:
-    """NIS2 Article 20 — management body accountability checklist. Directors can be held personally liable.
+@paywalled(price="$0.25")
+def management_body_checklist(api_key: str = "",
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.25/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    NIS2 Article 20 — management body accountability checklist. Directors can be held personally liable.
 
     Behavior:
         This tool is read-only and stateless — it produces analysis output
@@ -515,8 +559,12 @@ def management_body_checklist(api_key: str = "") -> str:
 
 
 @mcp.tool()
-def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = "") -> str:
-    """Generate a timestamped signed NIS2 compliance certificate (Pro/Enterprise tier).
+@paywalled(price="$0.25")
+def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = "",
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.25/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    Generate a timestamped signed NIS2 compliance certificate (Pro/Enterprise tier).
 
     Behavior:
         This tool generates structured output without modifying external systems.
