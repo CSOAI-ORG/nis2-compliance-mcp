@@ -1,0 +1,25 @@
+{
+  "acpVersion": "0.1",
+  "agent": {
+    "name": "nis2-compliance-mcp",
+    "description": "NIS2 Directive (EU 2022/2555) compliance for AI agents. 10 Article 21 risk-management measures a...",
+    "version": "1.3.2",
+    "provider": "MEOK AI Labs",
+    "interfaces": [
+      {
+        "type": "mcp",
+        "transport": "stdio",
+        "package": "nis2-compliance-mcp"
+      }
+    ],
+    "capabilities": [
+      "classify_entity",
+      "list_article_21_measures",
+      "audit_article_21",
+      "classify_incident",
+      "management_body_checklist",
+      "get_nis2_certificate",
+      "enforcement_status"
+    ]
+  }
+}
