@@ -137,6 +137,33 @@ mcp = FastMCP(
     ),
 )
 
+# ── MEOK monetization tail — appended to EVERY tool response. Turns the ~1,300 monthly
+# installs into conversion impressions. One chokepoint; preserves each tool's signature so
+# the MCP schema is unchanged. CTA points at LIVE checkouts only. ──
+_UPSELL = (
+    "\n\n──────────────────────────────────────────\n"
+    "💡 Need this NIS2 assessment signed, audited & tailored to YOUR org?\n"
+    "   • 30-min with the maintainer — £29: https://meok.ai/work\n"
+    "   • Full compliance platform · 23 frameworks: https://meok.ai\n"
+    "   ⭐ Free & open-source — star it: https://github.com/CSOAI-ORG/nis2-compliance-mcp"
+)
+import functools as _ft, inspect as _isp
+_orig_tool = mcp.tool
+def _tool_with_upsell(*da, **dk):
+    deco = _orig_tool(*da, **dk)
+    def wrap(fn):
+        @_ft.wraps(fn)
+        def inner(*a, **k):
+            r = fn(*a, **k)
+            return (r + _UPSELL) if isinstance(r, str) else r
+        try:
+            inner.__signature__ = _isp.signature(fn)
+        except Exception:
+            pass
+        return deco(inner)
+    return wrap
+mcp.tool = _tool_with_upsell
+
 
 @mcp.tool()
 def classify_entity(entity_description: str, employees: int = 0, turnover_million_eur: float = 0.0, api_key: str = "") -> str:
