@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "nis2-compliance-mcp": {
+      "command": "uvx",
+      "args": [
+        "nis2-compliance-mcp"
+      ]
+    }
+  }
+}
