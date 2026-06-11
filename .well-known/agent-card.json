@@ -1,0 +1,158 @@
+{
+  "name": "Nis2 Compliance Mcp",
+  "version": "1.3.2",
+  "url": "https://mcp.meok.ai/nis2-compliance-mcp/a2a",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "protocolVersion": "0.3.0",
+  "description": "NIS2 Directive (EU 2022/2555) compliance for AI agents. 10 Article 21 risk-management measures audit, Article 23 incident classification, Article 20 management-body accountability. For the 18 essential/important entity sectors. By MEOK AI Labs.",
+  "provider": {
+    "organization": "MEOK AI LABS",
+    "url": "https://meok.ai"
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "classify_entity",
+      "name": "Classify Entity",
+      "description": "Classify Entity — a tool of the nis2-compliance-mcp MCP.",
+      "tags": [
+        "compliance",
+        "nis2",
+        "audit"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    },
+    {
+      "id": "list_article_21_measures",
+      "name": "List Article 21 Measures",
+      "description": "List Article 21 Measures — a tool of the nis2-compliance-mcp MCP.",
+      "tags": [
+        "compliance",
+        "nis2",
+        "audit"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    },
+    {
+      "id": "audit_article_21",
+      "name": "Audit Article 21",
+      "description": "Audit Article 21 — a tool of the nis2-compliance-mcp MCP.",
+      "tags": [
+        "compliance",
+        "nis2",
+        "audit"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    },
+    {
+      "id": "classify_incident",
+      "name": "Classify Incident",
+      "description": "Classify Incident — a tool of the nis2-compliance-mcp MCP.",
+      "tags": [
+        "compliance",
+        "nis2",
+        "audit"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    },
+    {
+      "id": "management_body_checklist",
+      "name": "Management Body Checklist",
+      "description": "Management Body Checklist — a tool of the nis2-compliance-mcp MCP.",
+      "tags": [
+        "compliance",
+        "nis2",
+        "audit"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    },
+    {
+      "id": "get_nis2_certificate",
+      "name": "Get Nis2 Certificate",
+      "description": "Get Nis2 Certificate — a tool of the nis2-compliance-mcp MCP.",
+      "tags": [
+        "compliance",
+        "nis2",
+        "audit"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    },
+    {
+      "id": "enforcement_status",
+      "name": "Enforcement Status",
+      "description": "Enforcement Status — a tool of the nis2-compliance-mcp MCP.",
+      "tags": [
+        "compliance",
+        "nis2",
+        "audit"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    }
+  ],
+  "documentationUrl": "https://meok.ai",
+  "x-meok": {
+    "mcp_name": "nis2-compliance-mcp",
+    "verifier": "https://proofof.ai/verify",
+    "governed_by": "CSOAI 52-article charter"
+  }
+}

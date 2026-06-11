@@ -59,12 +59,12 @@ def check_access(api_key: str = ""):
     return _shared_check_access(api_key)
 
 
-FREE_DAILY_LIMIT = 10
+FREE_DAILY_LIMIT = 50
 _usage: dict[str, list[datetime]] = defaultdict(list)
 
-UPGRADE_STRIPE_PRO = "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j"  # £79/mo Pro
-UPGRADE_STRIPE_499 = "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j"
-UPGRADE_STRIPE_5000 = "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j"
+UPGRADE_STRIPE_PRO = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"  # £79/mo Pro
+UPGRADE_STRIPE_499 = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
+UPGRADE_STRIPE_5000 = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
 
 
 def _check_rate_limit(caller: str = "anonymous", tier: str = "free") -> Optional[str]:
@@ -209,9 +209,9 @@ def classify_entity(entity_description: str, employees: int = 0, turnover_millio
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
 
     d = entity_description.lower()
     # Sector matching: generic key tokens (e.g. "service", "market", "digital") are too broad and
@@ -323,7 +323,7 @@ def list_article_21_measures(api_key: str = "") -> str:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
     return json.dumps({
         "directive": "Directive (EU) 2022/2555 (NIS2)",
         "article": "Article 21 — Cybersecurity risk-management measures (minimum baseline)",
@@ -378,9 +378,9 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
 
     combined = (entity_description + " " + current_controls).lower()
     results = []
@@ -474,9 +474,9 @@ def classify_incident(
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
 
     # Significant incident criteria (Article 23.3 + Commission Implementing Regulation for specific sectors)
     triggers = []
@@ -630,11 +630,11 @@ def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = 
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
     if tier == "free":
         return json.dumps({
             "error": "Signed certificates require Pro (£79/mo) or Enterprise (£499/mo) tier.",
-            "upgrade_url": "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail",
+            "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail",
             "what_pro_unlocks": "Signed certificates, unlimited audits, governance-accountability pack, Article 20 training log generator, cross-MCP framework crosswalk.",
         })
     ts = datetime.now(timezone.utc)

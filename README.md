@@ -1,4 +1,10 @@
 <!-- mcp-name: io.github.CSOAI-ORG/nis2-compliance-mcp -->
+
+> ### 🔏 Free tier: 50 calls/day. Need audit-ready proof?
+> **Pro (£199/mo)** turns every result into an **HMAC-signed attestation** with a **public verify URL**
+> your auditor validates without an account — EU AI Act Art 11/12 ready.
+> → Start: **https://proofof.ai**  ·  `pip install meok-attestation-verify` to verify any cert.
+
 [![MCP Scorecard: 86/100](https://img.shields.io/badge/proofof.ai-86%2F100-5b21b6)](https://proofof.ai/scorecard/nis2-compliance-mcp.html)
 
 # Nis2 Compliance MCP
