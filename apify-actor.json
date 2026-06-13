@@ -1,0 +1,17 @@
+{
+  "name": "knowing_yucca/nis2-compliance-mcp",
+  "title": "MEOK Nis2 Compliance Mcp",
+  "description": "Compliance MCP server: nis2-compliance-mcp",
+  "readme": "# MEOK Nis2 Compliance Mcp\n\nCompliance MCP from MEOK AI.",
+  "categories": [
+    "AI",
+    "Compliance",
+    "Governance"
+  ],
+  "defaultRunInput": {
+    "tool": "quick_scan",
+    "arguments": {
+      "system": "example"
+    }
+  }
+}

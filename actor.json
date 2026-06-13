@@ -1,0 +1,10 @@
+{
+  "name": "knowing_yucca/nis2-compliance-mcp",
+  "title": "MEOK Nis2 Compliance Mcp",
+  "description": "Compliance MCP server",
+  "categories": [
+    "AI",
+    "Compliance"
+  ],
+  "isPublic": true
+}
