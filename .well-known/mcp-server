@@ -1,0 +1,5 @@
+{
+  "name": "nis2-compliance-mcp",
+  "description": "NIS2 (Directive (EU) 2022/2555) cybersecurity risk management for essential entities.",
+  "version": "1.5.1"
+}
