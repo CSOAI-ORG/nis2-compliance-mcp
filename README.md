@@ -132,3 +132,8 @@ Once configured, ask your assistant, for example:
 - "Use `classify_entity` to …"
 - "Use `list_article_21_measures` to …"
 - "Use `audit_article_21` to …"
+
+## See also
+
+MEOK compliance MCP fleet:
+[`ai-incident-reporting-mcp`](https://github.com/CSOAI-ORG/ai-incident-reporting-mcp), [`meok-eu-ai-act-art-26-fria-mcp`](https://github.com/CSOAI-ORG/meok-eu-ai-act-art-26-fria-mcp)

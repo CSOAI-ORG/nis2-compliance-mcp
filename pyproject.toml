@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nis2-compliance-mcp"
-version = "1.3.9"
+version = "1.3.10"
 description = "NIS2 Directive (EU 2022/2555) compliance for AI agents. 10 Article 21 risk-management measures audit, Article 23 incident classification, Article 20 management-body accountability. For the 18 essential/important entity sectors. By MEOK AI Labs."
 license = {file = "LICENSE"}
 readme = "README.md"
@@ -29,3 +29,22 @@ only-include = ["auth_middleware.py", "meok_x402.py", "server.py"]
 
 [project.scripts]
 nis2-compliance-mcp = "server:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "N"]
+ignore = ["E501"]
+
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_Configs = true
+disallow_untyped_defs = true
+
