@@ -85,7 +85,7 @@ def _check_rate_limit(caller: str = "anonymous", tier: str = "free") -> Optional
     if len(_usage[caller]) >= FREE_DAILY_LIMIT:
         return (
             f"Free tier limit reached ({FREE_DAILY_LIMIT}/day). Unlock unlimited + "
-            f"audit_all_obligations + signed certificates for £79/mo: {UPGRADE_STRIPE_PRO}"
+            f"audit_all_obligations + signed certificates for £79/mo: {STRIPE_PRO}"
         )
     _usage[caller].append(now)
     return None
@@ -419,7 +419,7 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
         ),
         "measures_detail": results,
         "management_body_liability_note": "NIS2 Article 20: management bodies are directly responsible for approving measures AND receive training. National authorities can impose personal liability.",
-        "upsell": f"Generate signed governance-accountability evidence pack (Article 20) with Pro tier (£79/mo): {UPGRADE_STRIPE_PRO}" if tier == "free" else None,
+        "upsell": f"Generate signed governance-accountability evidence pack (Article 20) with Pro tier (£79/mo): {STRIPE_PRO}" if tier == "free" else None,
     }, indent=2)
 
 

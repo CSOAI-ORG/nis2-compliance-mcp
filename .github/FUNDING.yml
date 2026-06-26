@@ -3,6 +3,10 @@
 
 github: [meok-ai-labs]
 custom:
+<<<<<<< Updated upstream
   - "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
+=======
+  - "https://buy.stripe.com/3cI00lgwQ28aaAtgP68k90M"
+>>>>>>> Stashed changes
   - "https://meok.ai/sponsor"
   - "https://nlnet.nl/propose"
