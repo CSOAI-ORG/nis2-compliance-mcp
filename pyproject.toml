@@ -17,7 +17,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Security",
 ]
-dependencies = ["mcp>=1.0.0"]
+dependencies = ["mcp>=2.0.0"]
 
 [project.urls]
 Homepage = "https://meok.ai/nis2-compliance-mcp"
@@ -25,7 +25,7 @@ Repository = "https://github.com/CSOAI-ORG/nis2-compliance-mcp"
 
 [tool.hatch.build.targets.wheel]
 packages = ["."]
-only-include = ["auth_middleware.py", "meok_x402.py", "server.py"]
+only-include = ["auth_middleware.py", "meok_x402.py", "server.py", "mcp2026_shim.py"]
 
 [project.scripts]
 nis2-compliance-mcp = "server:main"
