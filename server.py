@@ -25,7 +25,7 @@ import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from collections import defaultdict
-from mcp.server.fastmcp import FastMCP, Context
+from mcp.server.mcpserver import MCPServer as FastMCP  # mcp 2.x: FastMCP renamed MCPServer, Context
 try:
     from meok_x402 import paywalled, is_paid_call  # x402 per-call agent billing — no-op unless X402_ENABLED
 except ImportError:  # vendored module absent — stay free
