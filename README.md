@@ -1,7 +1,6 @@
 <!-- mcp-name: io.github.CSOAI-ORG/nis2-compliance-mcp -->
 
-> ### 🔏 Free tier: 50 calls/day. Need audit-ready proof?
-> **Pro (£199/mo)** turns every result into an **HMAC-signed attestation** with a **public verify URL**
+> **Pro** turns every result into an **HMAC-signed attestation** with a **public verify URL**
 > your auditor validates without an account — EU AI Act Art 11/12 ready.
 > → Start: **https://proofof.ai**  ·  `pip install meok-attestation-verify` to verify any cert.
 
@@ -78,14 +77,11 @@ This MCP server is built with **EU AI Act compliance** built-in:
 
 Need help getting compliant? **[Book a free 15-min diagnostic →](mailto:nicholas@meok.ai?subject=Compliance%20diagnostic)**
 
-## 🏢 Enterprise
+## How MEOK charges
 
-Need custom development, SLA guarantees, or white-label deployment?
+MEOK has no subscriptions and no tiers. You pay per job, and only when the agreed artifact has been delivered to you. There is no public price list. See <https://meok.ai/pricing>.
 
-- **Pro:** £79/mo — Full MCP suite + EU AI Act tracking
-- **Enterprise:** £499/mo — Custom dev + SLA + Dedicated support
-
-[View Pricing →](https://councilof.ai/payg) | [Contact Sales →](mailto:sales@meok.ai)
+This repository's source is MIT-licensed and free to self-host.
 
 ## 🤝 Part of the MEOK Ecosystem
 
