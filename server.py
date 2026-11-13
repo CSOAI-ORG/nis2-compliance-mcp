@@ -62,9 +62,9 @@ def check_access(api_key: str = ""):
 FREE_DAILY_LIMIT = 50
 _usage: dict[str, list[datetime]] = defaultdict(list)
 
-UPGRADE_STRIPE_PRO = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"  # £79/mo Pro
-UPGRADE_STRIPE_499 = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
-UPGRADE_STRIPE_5000 = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
+UPGRADE_STRIPE_PRO = "https://meok.ai/pricing"
+UPGRADE_STRIPE_499 = "https://meok.ai/pricing"
+UPGRADE_STRIPE_5000 = "https://meok.ai/pricing"
 
 
 def _check_rate_limit(caller: str = "anonymous", tier: str = "free") -> Optional[str]:
@@ -85,7 +85,7 @@ def _check_rate_limit(caller: str = "anonymous", tier: str = "free") -> Optional
     if len(_usage[caller]) >= FREE_DAILY_LIMIT:
         return (
             f"Free tier limit reached ({FREE_DAILY_LIMIT}/day). Unlock unlimited + "
-            f"audit_all_obligations + signed certificates for £79/mo: {STRIPE_PRO}"
+            f"audit_all_obligations + signed certificates for a per-job quote: {STRIPE_PRO}"
         )
     _usage[caller].append(now)
     return None
@@ -216,9 +216,9 @@ def classify_entity(entity_description: str, employees: int = 0, turnover_millio
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": err, "upgrade_url": "https://meok.ai/pricing"})
 
     d = entity_description.lower()
     # Sector matching: generic key tokens (e.g. "service", "market", "digital") are too broad and
@@ -330,7 +330,7 @@ def list_article_21_measures(api_key: str = "") -> str:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
     return json.dumps({
         "directive": "Directive (EU) 2022/2555 (NIS2)",
         "article": "Article 21 — Cybersecurity risk-management measures (minimum baseline)",
@@ -385,9 +385,9 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": err, "upgrade_url": "https://meok.ai/pricing"})
 
     combined = (entity_description + " " + current_controls).lower()
     results = []
@@ -419,7 +419,7 @@ def audit_article_21(entity_description: str, current_controls: str = "", api_ke
         ),
         "measures_detail": results,
         "management_body_liability_note": "NIS2 Article 20: management bodies are directly responsible for approving measures AND receive training. National authorities can impose personal liability.",
-        "upsell": f"Generate signed governance-accountability evidence pack (Article 20) with Pro tier (£79/mo): {STRIPE_PRO}" if tier == "free" else None,
+        "upsell": f"Generate signed governance-accountability evidence pack (Article 20) with Pro tier: {STRIPE_PRO}" if tier == "free" else None,
     }, indent=2)
 
 
@@ -481,9 +481,9 @@ def classify_incident(
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
     if err := _check_rate_limit(tier=tier):
-        return json.dumps({"error": err, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": err, "upgrade_url": "https://meok.ai/pricing"})
 
     # Significant incident criteria (Article 23.3 + Commission Implementing Regulation for specific sectors)
     triggers = []
@@ -637,11 +637,11 @@ def get_nis2_certificate(entity_name: str, overall_score: float, api_key: str = 
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail"})
+        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
     if tier == "free":
         return json.dumps({
-            "error": "Signed certificates require Pro (£79/mo) or Enterprise (£499/mo) tier.",
-            "upgrade_url": "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t?utm_source=mcp&utm_medium=tool&utm_campaign=nis2&utm_content=upgrade_tail",
+            "error": "Signed certificates require Pro or Enterprise tier.",
+            "upgrade_url": "https://meok.ai/pricing",
             "what_pro_unlocks": "Signed certificates, unlimited audits, governance-accountability pack, Article 20 training log generator, cross-MCP framework crosswalk.",
         })
     ts = datetime.now(timezone.utc)
