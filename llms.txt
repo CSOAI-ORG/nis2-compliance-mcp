@@ -6,7 +6,7 @@ pip install nis2-compliance-mcp
 
 ## Auth
 - Free tier: 10 calls/day, no API key needed
-- Pro tier (£49/mo): unlimited + signed certificates, set MEOK_API_KEY env var
+- Pro tier: unlimited + signed certificates, set MEOK_API_KEY env var
 - All tools are read-only and stateless
 
 ## Tools
