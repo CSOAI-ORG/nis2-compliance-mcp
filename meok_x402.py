@@ -25,7 +25,7 @@ Usage in a flagship `server.py` (apply only to high-value tools; leave quick_sca
 deadline_check FREE as top-of-funnel):
 
     from meok_x402 import paywalled
-    from mcp.server.fastmcp import Context
+    from mcp.server.mcpserver import Context
 
     @mcp.tool()
     @paywalled(price="$0.25")   # COST WARNING surfaced in the tool description (AWS convention)
